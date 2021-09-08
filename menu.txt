@@ -1,0 +1,27 @@
+ int iChoice = 0;
+            do
+            {
+                iChoice = Convert.ToInt32(Console.ReadLine());
+                Console.WriteLine("Choises available:\n");
+                Console.WriteLine("1. Print the list of books by Author\n " +
+                    "2. Print all the sales details by Title ID\n" +
+                    "3. Choose to exit");
+                
+            switch (iChoice)
+            {
+                
+                case 1:
+                    program.GetAuthourFromUser();
+                    break;
+                case 2:
+                    program.PrintSalesDetails();
+                    break;
+                case 3:
+                    break;
+                default:
+                        Console.WriteLine("Invalid choice. Please try again");
+                    break;
+            }
+        } while (iChoice!=0);
+           
+        
