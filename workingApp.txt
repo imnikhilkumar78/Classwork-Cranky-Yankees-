@@ -36,20 +36,29 @@ namespace DatabseFirst
         {
            
             String authorID = getAuthorId();
+            int count = 0;
             Console.WriteLine("Author Id is "+authorID);
           
             foreach (var item in context.Titleauthors.Include(e=> e.Title))
             {
                 if(authorID==item.AuId )
                 {
+                    count++;
                     if(item.TitleId == item.Title.TitleId)
                     {
+                        Console.WriteLine("------------------------------");
                         Console.WriteLine("title Id "+item.Title.TitleId);
                         Console.WriteLine("title name "+item.Title.Title1);
+                        Console.WriteLine("Title Price "+item.Title.Price);
+                        Console.WriteLine("---------------------------------");
                     }
+                   
                 }
+               
 
             }
+            if(count==0)
+                Console.WriteLine("Author yet to start");
 
 
         }
@@ -62,6 +71,7 @@ namespace DatabseFirst
             List<Sale> sales = context.Sales.Where(e => e.TitleId == titleId).ToList();
             foreach (var item in sales)
             {
+                Console.WriteLine("----------------------------------");
                 Console.WriteLine("Store Id " + item.StorId);
                 Console.WriteLine("Order Number " + item.OrdNum);
                 Console.WriteLine("Title Id " + item.TitleId);
@@ -74,8 +84,35 @@ namespace DatabseFirst
         {
             Console.WriteLine("Hello World!");
             Program prog = new Program();
-            prog.PrintBooksOfAuthor();
-            prog.PrintSalesDetails();
+            int iChoice = 0;
+            do
+            {
+               
+                Console.WriteLine("Choises available:\n");
+                Console.WriteLine("1. Print the list of books by Author\n" +
+                    "2. Print all the sales details by Title ID\n" +
+                    "3. Choose to exit");
+                iChoice = Convert.ToInt32(Console.ReadLine());
+
+                switch (iChoice)
+                {
+
+                    case 1:
+                        prog.PrintBooksOfAuthor();
+                        break;
+                    case 2:
+                        prog.PrintSalesDetails();
+                        break;
+                    case 3:
+                        Console.WriteLine("You have decided to leave the Application.. Thank You for staying with Us.");
+                        break;
+                    default:
+                        Console.WriteLine("Invalid choice. Please try again");
+                        break;
+              
+                }
+            } while (iChoice != 3);
+           
         }
     }
 }
